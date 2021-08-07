@@ -40,6 +40,14 @@ h1 {
 .todo-form {
   margin-bottom: 32px;
 }
+.filter-todo {
+  padding: 14px 32px 14px 16px;
+  border-radius: 4px 0 0 4px;
+  border: 2px solid #5d0cff;
+  outline: none;
+  background: transparent;
+  color: #fff;
+}
 
 .todo-input {
   padding: 14px 32px 14px 16px;
@@ -68,6 +76,16 @@ h1 {
   );
   color: #fff;
   text-transform: capitalize;
+}
+
+.select {
+  padding: 15px;
+}
+
+.btn-select {
+  border-radius: 4px;
+  margin: 10px;
+  width: 120px;
 }
 
 .todo-input.edit {
@@ -140,8 +158,15 @@ h1 {
 .delete-icon {
   margin-right: 5px;
   color: #fff;
+  transition: color 0.3s;
 }
 
 .edit-icon {
   color: #fff;
+  transition: color 0.3s;
+}
+
+.delete-icon:hover,
+.edit-icon:hover {
+  color: black;
 }

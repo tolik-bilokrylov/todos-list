@@ -4,8 +4,7 @@ import TodoForm from './TodoForm';
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
-
-
+  const [filteredTodos, setFilteredTodos] = useState([]);
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
@@ -61,19 +60,43 @@ function TodoList() {
 
   useEffect(() => {
     saveLocalTodos();
-  })
+  });
+
+  useEffect(() => {
+    completedTodos();
+    completedTodos();
+    allTodos()
+  }, [todos]);
+
+  const completedTodos = () => {
+    setFilteredTodos(todos.filter(todo => todo.isComplete === true));
+  }
+
+  const uncompletedTodos = () => {
+    setFilteredTodos(todos.filter(todo => todo.isComplete === undefined));
+  }
+
+  const allTodos = () => {
+    setFilteredTodos(todos);
+  }
 
   return (
     <div>
       <h1>
         What`s the Plan for Today?
       </h1>
-      <TodoForm onSubmit={addTodo} />
+      <TodoForm
+        onSubmit={addTodo}
+        completedTodos={completedTodos}
+        uncompletedTodos={uncompletedTodos}
+        allTodos={allTodos}
+      />
       <Todo
         todos={todos}
         completeTodo={completeTodo}
         removeTodo={removeTodo}
         updateTodo={updateTodo}
+        filteredTodos={filteredTodos}
       />
     </div>
   )

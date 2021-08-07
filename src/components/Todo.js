@@ -3,7 +3,7 @@ import TodoForm from './TodoForm';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 
-const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
+const Todo = ({ todos, completeTodo, removeTodo, updateTodo, filteredTodos }) => {
   const [edit, setEdit] = useState({
     id: null,
     value: ''
@@ -21,7 +21,7 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
     return <TodoForm edit={edit} onSubmit={submitUpdate} />;
   }
 
-  return todos.map((todo, index) => (
+  return filteredTodos.map((todo, index) => (
     <div
       className={todo.isComplete
         ? 'todo-row complete'

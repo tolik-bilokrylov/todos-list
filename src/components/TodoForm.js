@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-function TodoForm(props) {
+function TodoForm({ completedTodos, uncompletedTodos, allTodos, ...props }) {
   const [input, setInput] = useState(props.edit ? props.edit.value : '');
 
   const inputRef = useRef(null);
@@ -52,6 +52,26 @@ function TodoForm(props) {
           <button onClick={handleSubmit} className='todo-button'>
             Add todo
           </button>
+          <div className="select">
+            <button
+              onClick={allTodos}
+              className='todo-button btn-select'
+            >
+              All
+            </button>
+            <button
+              onClick={completedTodos}
+              className='todo-button btn-select'
+            >
+              Completed
+            </button>
+            <button
+              onClick={uncompletedTodos}
+              className='todo-button btn-select'
+            >
+              Uncompleted
+            </button>
+          </div>
         </>
       )}
     </form>
