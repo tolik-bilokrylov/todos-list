@@ -41,6 +41,18 @@ function TodoList() {
     setTodos(updateTodos);
   };
 
+  const completedTodos = () => {
+    setFilteredTodos(todos.filter(todo => todo.isComplete === true));
+  }
+
+  const uncompletedTodos = () => {
+    setFilteredTodos(todos.filter(todo => todo.isComplete === undefined));
+  }
+
+  const allTodos = () => {
+    setFilteredTodos(todos);
+  }
+
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
   };
@@ -62,23 +74,13 @@ function TodoList() {
     saveLocalTodos();
   });
 
+  /* eslint-disable */
   useEffect(() => {
     completedTodos();
-    completedTodos();
+    uncompletedTodos();
     allTodos()
   }, [todos]);
-
-  const completedTodos = () => {
-    setFilteredTodos(todos.filter(todo => todo.isComplete === true));
-  }
-
-  const uncompletedTodos = () => {
-    setFilteredTodos(todos.filter(todo => todo.isComplete === undefined));
-  }
-
-  const allTodos = () => {
-    setFilteredTodos(todos);
-  }
+  /* eslint-enable */
 
   return (
     <div>
