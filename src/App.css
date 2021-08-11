@@ -147,18 +147,12 @@ h1 {
   cursor: pointer;
 }
 
-.delete-icon {
+.icon-style {
+  color: #fff;
+  transition: color 0.3s;
   margin-right: 5px;
-  color: #fff;
-  transition: color 0.3s;
 }
 
-.edit-icon {
-  color: #fff;
-  transition: color 0.3s;
-}
-
-.delete-icon:hover,
-.edit-icon:hover {
+.icon-style:hover {
   color: black;
 }
