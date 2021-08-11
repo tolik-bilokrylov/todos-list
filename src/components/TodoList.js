@@ -5,6 +5,7 @@ import TodoForm from './TodoForm';
 function TodoList() {
   const [todos, setTodos] = useState([]);
   const [filteredTodos, setFilteredTodos] = useState([]);
+  const [status, setStatus] = useState("all")
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
@@ -35,24 +36,25 @@ function TodoList() {
       if (todo.id === id) {
         todo.isComplete = !todo.isComplete;
       }
-      console.log(todo.isComplete)
+      
       return todo;
     });
     setTodos(updateTodos);
   };
 
-  const completedTodos = () => {
-    setFilteredTodos(todos.filter(todo => todo.isComplete === true));
-  }
-
-  const uncompletedTodos = () => {
-    setFilteredTodos(todos.filter(todo => todo.isComplete !== true));
-  }
-  
-
-  const allTodos = () => {  
-    setFilteredTodos(todos);
-  }
+  const carrentTodosList = () => {
+    switch(status) {
+      case "completedTodos":
+        setFilteredTodos(todos.filter(todo => todo.isComplete === true));
+        break;
+      case "uncompletedTodos":
+        setFilteredTodos(todos.filter(todo => todo.isComplete !== true));
+        break;
+      default:
+        setFilteredTodos(todos);
+        break;
+    }
+  };
 
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -77,12 +79,10 @@ function TodoList() {
 
   /* eslint-disable */
   useEffect(() => {
-    completedTodos();
-    uncompletedTodos();
-    allTodos()
-  }, [todos]);
+    carrentTodosList();
+  }, [todos, status]);
   /* eslint-enable */
-
+  
   return (
     <div>
       <h1>
@@ -90,9 +90,8 @@ function TodoList() {
       </h1>
       <TodoForm
         onSubmit={addTodo}
-        completedTodos={completedTodos}
-        uncompletedTodos={uncompletedTodos}
-        allTodos={allTodos}
+        carrentTodosList={carrentTodosList}
+        setStatus={setStatus}
       />
       <Todo
         todos={todos}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-function TodoForm({ completedTodos, uncompletedTodos, allTodos, ...props }) {
+function TodoForm({ carrentTodosList, setStatus, ...props }) {
   const [input, setInput] = useState(props.edit ? props.edit.value : '');
 
   const inputRef = useRef(null);
@@ -11,6 +11,11 @@ function TodoForm({ completedTodos, uncompletedTodos, allTodos, ...props }) {
 
   const handleChange = (event) => {
     setInput(event.target.value);
+  };
+
+  const statusTodos = (event) => {
+    setStatus(event.target.value)
+    console.log(event.target.value)
   };
 
   const handleSubmit = (event) => {
@@ -52,26 +57,15 @@ function TodoForm({ completedTodos, uncompletedTodos, allTodos, ...props }) {
           <button onClick={handleSubmit} className='todo-button'>
             Add todo
           </button>
-          <div className="select">
-            <button
-              onClick={allTodos}
-              className='todo-button btn-select'
-            >
-              All
-            </button>
-            <button
-              onClick={completedTodos}
-              className='todo-button btn-select'
-            >
-              Completed
-            </button>
-            <button
-              onClick={uncompletedTodos}
-              className='todo-button btn-select'
-            >
-              Uncompleted
-            </button>
-          </div>
+          <select
+            onChange={statusTodos}
+            name="characters"
+            className="todo-button btn-select"
+          >
+            <option value="all">All</option>
+            <option value="completedTodos">Completed</option>
+            <option value="uncompletedTodos">Uncompleted</option>
+          </select>
         </>
       )}
     </form>

@@ -4,7 +4,7 @@ import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 import { FaCheck } from 'react-icons/fa';
 
-const Todo = ({ todos, completeTodo, removeTodo, updateTodo, filteredTodos }) => {
+const Todo = ({ completeTodo, removeTodo, updateTodo, filteredTodos }) => {
   const [edit, setEdit] = useState({
     id: null,
     value: ''

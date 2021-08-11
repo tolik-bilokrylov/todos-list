@@ -77,7 +77,13 @@ h1 {
 .btn-select {
   border-radius: 4px;
   margin: 10px;
-  width: 120px;
+  width: 140px;
+}
+
+option {
+  color:rgb(31, 31, 161);
+  font-size: 16px;
+  text-transform: capitalize;
 }
 
 .todo-input.edit {
