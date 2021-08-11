@@ -34,6 +34,7 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo, filteredTodos }) =>
       </div>
       <div className='icons'>
         <FaCheck
+          key={todo.id}
           onClick={() => completeTodo(todo.id)}
           className='icon-style'
         />

@@ -35,21 +35,36 @@ function TodoList() {
       if (todo.id === id) {
         todo.isComplete = !todo.isComplete;
       }
-
+      console.log(todo.isComplete)
       return todo;
     });
     setTodos(updateTodos);
   };
+  // const completeTodo = (id) => {
+  //   setTodos(
+  //     todos.map((item) => {
+  //       if (item.id === id) {
+  //         return {
+  //           ...item,
+  //           isComplete: !item.isComplete,
+  //         };
+  //       }
+  //       console.log(item.isComplete)
+  //       return item;
+  //     })
+  //   )
+  // }
 
   const completedTodos = () => {
     setFilteredTodos(todos.filter(todo => todo.isComplete === true));
   }
 
   const uncompletedTodos = () => {
-    setFilteredTodos(todos.filter(todo => todo.isComplete === undefined));
+    setFilteredTodos(todos.filter(todo => todo.isComplete !== true));
   }
+  
 
-  const allTodos = () => {
+  const allTodos = () => {  
     setFilteredTodos(todos);
   }
 
