@@ -26,7 +26,7 @@ body {
   padding-bottom: 32px;
 }
 
-h1 {
+.title {
   margin: 32px 0;
   color: #fff;
   font-size: 24px;
@@ -80,7 +80,7 @@ h1 {
   width: 140px;
 }
 
-option {
+.option {
   color:rgb(31, 31, 161);
   font-size: 16px;
   text-transform: capitalize;

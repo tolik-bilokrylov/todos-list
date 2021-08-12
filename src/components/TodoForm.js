@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 
 function TodoForm({ carrentTodosList, setStatus, ...props }) {
   const [input, setInput] = useState(props.edit ? props.edit.value : '');
-
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -15,7 +14,6 @@ function TodoForm({ carrentTodosList, setStatus, ...props }) {
 
   const statusTodos = (event) => {
     setStatus(event.target.value)
-    console.log(event.target.value)
   };
 
   const handleSubmit = (event) => {
@@ -62,9 +60,24 @@ function TodoForm({ carrentTodosList, setStatus, ...props }) {
             name="characters"
             className="todo-button btn-select"
           >
-            <option value="all">All</option>
-            <option value="completedTodos">Completed</option>
-            <option value="uncompletedTodos">Uncompleted</option>
+            <option
+              className="option"
+              value="all"
+            >
+              All
+            </option>
+            <option
+              className="option"
+              value="completedTodos"
+            >
+              Completed
+            </option>
+            <option
+              className="option"
+              value="uncompletedTodos"
+            >
+              Uncompleted
+            </option>
           </select>
         </>
       )}

@@ -85,7 +85,7 @@ function TodoList() {
   
   return (
     <div>
-      <h1>
+      <h1 className="title">
         What`s the Plan for Today?
       </h1>
       <TodoForm
