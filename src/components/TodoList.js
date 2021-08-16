@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Todo from './Todo';
 import TodoForm from './TodoForm';
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
-  const [filteredTodos, setFilteredTodos] = useState([]);
-  const [status, setStatus] = useState("all")
+  const [status, setStatus] = useState("all");
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
@@ -17,7 +16,7 @@ function TodoList() {
     setTodos(newTodos);
   };
 
-  const updateTodo = (todoId, newValue) => {
+  const updatedTodo = (todoId, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
       return;
     };
@@ -26,7 +25,7 @@ function TodoList() {
   };
 
   const removeTodo = (id) => {
-    const removeArr = [...todos].filter(todo => todo.id !== id);
+    const removeArr = todos.filter(todo => todo.id !== id);
 
     setTodos(removeArr);
   };
@@ -42,19 +41,23 @@ function TodoList() {
     setTodos(updateTodos);
   };
 
-  const carrentTodosList = () => {
-    switch(status) {
-      case "completedTodos":
-        setFilteredTodos(todos.filter(todo => todo.isComplete === true));
-        break;
-      case "uncompletedTodos":
-        setFilteredTodos(todos.filter(todo => todo.isComplete !== true));
-        break;
-      default:
-        setFilteredTodos(todos);
-        break;
+  const filteredTodos = useMemo(() => {
+    let result = todos;
+
+    if (status === "all") {
+      return result;
     }
-  };
+
+    if (status === "completedTodos") {
+      result = result.filter(todo => todo.isComplete === true);
+    }
+
+    if (status === "uncompletedTodos") {
+      result = result.filter(todo => todo.isComplete !== true);
+    }
+
+    return result;
+  }, [todos, status]);
 
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -77,12 +80,6 @@ function TodoList() {
     saveLocalTodos();
   });
 
-  /* eslint-disable */
-  useEffect(() => {
-    carrentTodosList();
-  }, [todos, status]);
-  /* eslint-enable */
-  
   return (
     <div>
       <h1 className="title">
@@ -90,14 +87,12 @@ function TodoList() {
       </h1>
       <TodoForm
         onSubmit={addTodo}
-        carrentTodosList={carrentTodosList}
         setStatus={setStatus}
       />
       <Todo
-        todos={todos}
         completeTodo={completeTodo}
         removeTodo={removeTodo}
-        updateTodo={updateTodo}
+        updatedTodo={updatedTodo}
         filteredTodos={filteredTodos}
       />
     </div>

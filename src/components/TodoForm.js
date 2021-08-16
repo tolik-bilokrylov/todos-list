@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-function TodoForm({ carrentTodosList, setStatus, ...props }) {
+function TodoForm({ setStatus, ...props }) {
   const [input, setInput] = useState(props.edit ? props.edit.value : '');
   const inputRef = useRef(null);
 
