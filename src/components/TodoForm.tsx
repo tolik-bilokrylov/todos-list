@@ -1,22 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-function TodoForm({ setStatus, ...props }) {
+const TodoForm: React.FC<any> = ({ setStatus, ...props }) => {
   const [input, setInput] = useState(props.edit ? props.edit.value : '');
   const inputRef = useRef(null);
 
-  useEffect(() => {
-    inputRef.current.focus();
-  });
+  // useEffect(() => {
+  //   inputRef.current.focus();
+  // });
 
-  const handleChange = (event) => {
+  const handleChange = (event: any) => {
     setInput(event.target.value);
   };
 
-  const statusTodos = (event) => {
+  const statusTodos = (event: any) => {
     setStatus(event.target.value)
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
 
     props.onSubmit({

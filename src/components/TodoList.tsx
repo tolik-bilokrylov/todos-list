@@ -2,11 +2,22 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Todo from './Todo';
 import TodoForm from './TodoForm';
 
+
+interface TodoI {
+  text: string,
+  id: null | number,
+  isComplete: boolean,
+}
+
+interface LocalStorage {
+  localStorage: null | string
+}
+
 function TodoList() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([] as TodoI[]);
   const [status, setStatus] = useState("all");
 
-  const addTodo = (todo) => {
+  const addTodo = (todo: TodoI) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
     };
@@ -16,7 +27,7 @@ function TodoList() {
     setTodos(newTodos);
   };
 
-  const updatedTodo = (todoId, newValue) => {
+  const updatedTodo = (todoId: number, newValue: TodoI) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
       return;
     };
@@ -24,13 +35,13 @@ function TodoList() {
     setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)));
   };
 
-  const removeTodo = (id) => {
+  const removeTodo = (id: number | null) => {
     const removeArr = todos.filter(todo => todo.id !== id);
 
     setTodos(removeArr);
   };
 
-  const completeTodo = (id) => {
+  const completeTodo = (id: number | null) => {
     let updateTodos = todos.map(todo => {
       if (todo.id === id) {
         todo.isComplete = !todo.isComplete;
@@ -64,10 +75,11 @@ function TodoList() {
   };
 
   const getLocalTodos = () => {
-    if (localStorage.getItem("todos") === null) {
+    const todosLocal = localStorage.getItem("todos");
+    if ( todosLocal === null) {
       localStorage.setItem("todos", JSON.stringify([]));
-    } else {
-      let todoLocal = JSON.parse(localStorage.getItem("todos"));
+    } else if (typeof  todosLocal === "string") {
+      let todoLocal = JSON.parse( todosLocal);
       setTodos(todoLocal);
     }
   };

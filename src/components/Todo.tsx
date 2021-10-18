@@ -4,13 +4,31 @@ import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 import { FaCheck } from 'react-icons/fa';
 
-const Todo = ({ completeTodo, removeTodo, updatedTodo, filteredTodos }) => {
+interface Todo {
+  text: string,
+  id: null | number,
+  isComplete: boolean,
+}
+
+interface TodoHandle {
+  completeTodo: (id: null | number) => void,
+  removeTodo: (id: null | number) => void,
+  filteredTodos: any,
+  updatedTodo: any
+}
+
+interface Edit {
+  id: null | number,
+  value: string,
+}
+
+const Todo: React.FC<TodoHandle> = ({ completeTodo, removeTodo, updatedTodo, filteredTodos }) => {
   const [edit, setEdit] = useState({
     id: null,
     value: ''
-  });
+  } as Edit);
 
-  const submitUpdate = value => {
+  const submitUpdate = (value: string): void => {
     updatedTodo(edit.id, value);
     setEdit({
       id: null,
@@ -22,7 +40,7 @@ const Todo = ({ completeTodo, removeTodo, updatedTodo, filteredTodos }) => {
     return <TodoForm edit={edit} onSubmit={submitUpdate} />;
   }
 
-  return filteredTodos.map((todo, index) => (
+  return filteredTodos.map((todo: Todo, index: number) => (
     <div
       className={todo.isComplete
         ? 'todo-row complete'
